@@ -3,7 +3,9 @@
 //import com.example.goorm.oreum.CsvReader;
 //import com.example.goorm.oreum.CsvWriter;
 //import com.example.goorm.oreum.Oreum;
+//import com.example.goorm.oreum.Test;
 //import com.example.goorm.oreum.repository.OreumRepository;
+//import com.example.goorm.oreum.repository.TestRepository;
 //import lombok.RequiredArgsConstructor;
 //import lombok.extern.slf4j.Slf4j;
 //import org.springframework.batch.core.Job;
@@ -21,7 +23,7 @@
 //    private final JobBuilderFactory jobBuilderFactory;
 //    private final StepBuilderFactory stepBuilderFactory;
 //
-//    private final OreumRepository oreumRepository;
+//    private final TestRepository testRepository;
 //    private final CsvReader csvReader;
 //    private final CsvWriter csvWriter;
 //
@@ -38,9 +40,21 @@
 //                .build();
 //    }
 //
+//    // csvFileItemReaderStep 이라는 이름의 Step 생성
 //    @Bean
-//    public ItemProcessor<String, Oreum> csvProcessor() {
+//    public Step csvFileItemReaderStep() {
+//        return stepBuilderFactory.get("csvFileItemReaderStep")
+//                .<String, Oreum>chunk(chunkSize)
+//                // Reader 에서 읽어올 타입 - String, Writer에 넘겨줄 타입이 Oreum
+//                .reader(csvReader.csvFileItemReader()) // 일단 csv에서 String 읽기
+//                .processor(csvProcessor()) // String을 가공
+//                .writer(csvWriter)
+//                .build();
+//    }
+//    @Bean
+//    public ItemProcessor<String, Test> csvProcessor() {
 //        return oreumStr -> {
+//            System.out.println(oreumStr);
 //            String[] lineArr = oreumStr.split(",");
 //            String name = lineArr[0];
 //            String type = lineArr[1].split("/")[1];
@@ -50,7 +64,7 @@
 //            double y = Double.parseDouble(pos.split(" ")[1]);
 //            double z = Double.parseDouble(pos.split(" ")[2]);
 //
-//            Oreum oreum = Oreum.builder()
+//            Test oreum = Test.builder()
 //                    .name(name)
 //                    .xPos(x)
 //                    .yPos(y)
@@ -60,7 +74,7 @@
 //                    .build();
 //
 //            oreum.toTypeEnum(type);
-//            oreumRepository.save(oreum);
+//            testRepository.save(oreum);
 //            if((monthCheck == 1 || monthCheck == 3 || monthCheck == 5 || monthCheck == 7
 //                    || monthCheck == 8 || monthCheck == 10 || monthCheck ==12) && dayCheck == 31) {
 //                monthCheck++;
@@ -79,15 +93,4 @@
 //        };
 //    }
 //
-//    // csvFileItemReaderStep 이라는 이름의 Step 생성
-//    @Bean
-//    public Step csvFileItemReaderStep() {
-//        return stepBuilderFactory.get("csvFileItemReaderStep")
-//                .<String, Oreum>chunk(chunkSize)
-//                // Reader 에서 읽어올 타입 - String, Writer에 넘겨줄 타입이 Oreum
-//                .reader(csvReader.csvFileItemReader()) // 일단 csv에서 String 읽기
-//                .processor(csvProcessor()) // String을 가공
-//                .writer(csvWriter)
-//                .build();
-//    }
 //}
