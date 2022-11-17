@@ -11,13 +11,13 @@
 //
 //@Configuration
 //@RequiredArgsConstructor
-//public class CsvWriter implements ItemWriter<Oreum> {
+//public class CsvWriter implements ItemWriter<Test> {
 ////    private final OreumRepository oreumRepository;
 //
 //    private final TestRepository testRepository;
 //
 //    @Override
-//    public void write(List<? extends Oreum> list) throws Exception {
-//        oreumRepository.saveAll(new ArrayList<Oreum>(list));
+//    public void write(List<? extends Test> list) throws Exception {
+//        testRepository.saveAll(new ArrayList<Test>(list));
 //    }
 //}
