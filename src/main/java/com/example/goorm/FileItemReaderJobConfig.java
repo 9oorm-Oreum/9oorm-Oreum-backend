@@ -63,6 +63,10 @@ public class FileItemReaderJobConfig {
             double y = Double.parseDouble(pos.split(" ")[1]);
             double z = Double.parseDouble(pos.split(" ")[2]);
 
+            int left = (int)(Math.random()*5); // 0~4 (스티커 안붙이는 경우 고려)
+            // 왼쪽이 빈 스티커인 경우, 무조건 오른쪽 스티커는 있도록
+            int right = (left == 0) ? (int)(Math.random()*4)+1 : (int)(Math.random()*5);
+
             Oreum oreum = Oreum.builder()
                     .name(name)
                     .xPos(x)
@@ -70,12 +74,15 @@ public class FileItemReaderJobConfig {
                     .zPos(z)
                     .month(monthCheck)
                     .day(dayCheck)
+                    .leftPos(left)
+                    .rightPos(right)
                     .build();
 
             oreum.toTypeEnum(type);
             oreumRepository.save(oreum);
-            if((monthCheck == 1 || monthCheck == 3 || monthCheck == 5 || monthCheck == 7
-                    || monthCheck == 8 || monthCheck == 10 || monthCheck ==12) && dayCheck == 31) {
+
+            if(((monthCheck<=7 && monthCheck%2==1) || (monthCheck>=8 && monthCheck%2==0))
+                    && dayCheck == 31) {
                 monthCheck++;
                 dayCheck = 0;
             }
@@ -83,7 +90,8 @@ public class FileItemReaderJobConfig {
                 monthCheck++;
                 dayCheck = 0;
             }
-            else if((monthCheck == 4 || monthCheck == 6 || monthCheck ==9 || monthCheck == 11) && dayCheck == 30){
+            else if((monthCheck == 4 || monthCheck == 6 || monthCheck == 9 || monthCheck == 11)
+                    && dayCheck == 30){
                 monthCheck++;
                 dayCheck = 0;
             }
@@ -91,5 +99,4 @@ public class FileItemReaderJobConfig {
             return oreum;
         };
     }
-
 }
