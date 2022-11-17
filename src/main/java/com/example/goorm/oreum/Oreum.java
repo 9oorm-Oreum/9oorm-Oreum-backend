@@ -1,3 +1,5 @@
+package com.example.goorm.oreum;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +21,11 @@ public class Oreum {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+    private String type;
+    private Double xPos;
+    private Double yPos;
+    private Double zPos;
     private LocalDateTime birthDate;
 
-    private String oreumType;
 }
