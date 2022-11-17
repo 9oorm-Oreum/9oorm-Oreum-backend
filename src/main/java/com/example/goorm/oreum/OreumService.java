@@ -6,12 +6,10 @@ import com.example.goorm.oreum.repository.MyOreumRepository;
 import com.example.goorm.oreum.repository.OreumRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.*;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -52,9 +50,7 @@ public class OreumService {
             int monthCheck = 1;
             int dayCheck = 1;
 
-            int cnt =0 ;
             while((line = br.readLine()) != null) {
-                System.out.println(cnt++);
                 String[] lineArr = line.split(",");
                 String name = lineArr[0];
                 String type = lineArr[1].split("/")[1];

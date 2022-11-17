@@ -11,7 +11,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://9oorm-oreum-frontend.vercel.app/")
-                .allowedMethods("OPTIONS", "GET", "POST", "PUT", "DELETE");
+                .allowedOrigins("http://localhost:3000/", "https://9oorm-oreum-frontend.vercel.app/")
+                .allowedMethods("GET", "POST");
     }
 }
