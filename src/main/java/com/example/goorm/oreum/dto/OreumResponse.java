@@ -39,6 +39,7 @@ public class OreumResponse {
                 .xPos(oreum.getXPos())
                 .yPos(oreum.getYPos())
                 .zPos(oreum.getZPos())
+                .myOreumId(myOreum.getId())
                 .build();
     }
 }

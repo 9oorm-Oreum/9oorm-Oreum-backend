@@ -22,7 +22,7 @@ public class OreumController {
     @PostMapping("/oreums")
     public ResponseEntity<String> pushData(){
         oreumService.readCsv();
-        return ResponseEntity.ok().body("완성");
+        return ResponseEntity.ok().body("DB 푸시 완료");
     }
 
     // 생일에 따른 오름 정보 보여주기 (입력하고 디비에 저장하는 거까지)

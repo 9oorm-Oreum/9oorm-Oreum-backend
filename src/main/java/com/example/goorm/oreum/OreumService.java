@@ -19,10 +19,6 @@ public class OreumService {
     private final OreumRepository oreumRepository;
     private final MyOreumRepository myOreumRepository;
 
-    public List<Oreum> getOreums(){
-        return oreumRepository.findAll();
-    }
-
     public OreumResponse getOreum(BirthDayRequest request){
         int month = request.getMonth();
         int day = request.getDay();
@@ -75,6 +71,7 @@ public class OreumService {
                         .month(monthCheck)
                         .day(dayCheck)
                         .build();
+
                 oreum.toTypeEnum(type);
                 oreumRepository.save(oreum);
                 if((monthCheck == 1 || monthCheck == 3 || monthCheck == 5 || monthCheck == 7
