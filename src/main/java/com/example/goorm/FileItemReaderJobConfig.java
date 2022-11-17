@@ -55,6 +55,8 @@ public class FileItemReaderJobConfig {
     public ItemProcessor<CsvReaderDto, Oreum> csvProcessor() {
         return csvReaderDto -> {
             String name = csvReaderDto.getName();
+            if(!name.contains("오름"))
+                name += "오름";
             String type = csvReaderDto.getType().split("/")[1];
             String pos = csvReaderDto.getPos();
             double x = Double.parseDouble(pos.split(" ")[0]);
