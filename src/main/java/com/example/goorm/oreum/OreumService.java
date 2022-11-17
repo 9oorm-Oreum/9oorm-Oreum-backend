@@ -1,26 +1,49 @@
 package com.example.goorm.oreum;
 
+import com.example.goorm.oreum.dto.BirthDayRequest;
+import com.example.goorm.oreum.dto.OreumResponse;
+import com.example.goorm.oreum.repository.MyOreumRepository;
+import com.example.goorm.oreum.repository.OreumRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class OreumService {
     private final OreumRepository oreumRepository;
+    private final MyOreumRepository myOreumRepository;
+
     public List<Oreum> getOreums(){
         return oreumRepository.findAll();
     }
 
-    public Oreum getOreum(BirtyDayRequest request){
+    public OreumResponse getOreum(BirthDayRequest request){
         int month = request.getMonth();
         int day = request.getDay();
-        return oreumRepository.findByBirthday(month, day);
+        Oreum oreum = oreumRepository.findByBirthday(month, day); // 저장된 오름을 찾아서
+        MyOreum myOreum = MyOreum.builder() // 나의 오름을 저장하고
+                .nickname(request.getNickname())
+                .oreumId(oreum.getId())
+                .build();
+
+        myOreumRepository.save(myOreum);
+        return OreumResponse.of(oreum, myOreum, request);
+    }
+
+    public OreumResponse getMyOreum(Long myOreumId){
+        MyOreum myOreum = myOreumRepository.findById(myOreumId).orElseThrow(() -> {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당하는 오름 스티커 번호가 없습니다");
+        });
+        Oreum oreumInfo = oreumRepository.findById(myOreum.getOreumId()).orElseThrow(() -> {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당하는 오름의 번호가 없습니다");
+        });
+        return OreumResponse.ofOthers(oreumInfo, myOreum);
     }
 
     public void readCsv(){

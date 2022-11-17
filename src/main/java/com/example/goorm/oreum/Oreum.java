@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -22,10 +19,12 @@ public class Oreum {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Enumerated(EnumType.STRING)
     private OreumType type;
-    private Double xPos;
-    private Double yPos;
-    private Double zPos;
+    private double xPos;
+    private double yPos;
+    private double zPos;
     private int month;
     private int day;
 

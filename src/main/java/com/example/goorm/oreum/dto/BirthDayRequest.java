@@ -1,4 +1,4 @@
-package com.example.goorm.oreum;
+package com.example.goorm.oreum.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BirtyDayRequest {
+public class BirthDayRequest {
+    private String nickname;
     private int month;
     private int day;
 }
