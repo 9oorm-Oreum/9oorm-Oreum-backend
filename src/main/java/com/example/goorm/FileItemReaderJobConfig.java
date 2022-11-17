@@ -44,7 +44,7 @@ public class FileItemReaderJobConfig {
     @Bean
     public Step csvFileItemReaderStep() {
         return stepBuilderFactory.get("csvFileItemReaderStep")
-                .<String, Test>chunk(chunkSize)
+                .<String, Oreum>chunk(chunkSize)
                 // Reader 에서 읽어올 타입 - String, Writer에 넘겨줄 타입이 Oreum
                 .reader(csvReader.csvFileItemReader()) // 일단 csv에서 String 읽기
                 .processor(csvProcessor()) // String을 가공
