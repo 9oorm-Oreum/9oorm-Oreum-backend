@@ -16,6 +16,10 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
@@ -63,9 +67,16 @@ public class FileItemReaderJobConfig {
             double y = Double.parseDouble(pos.split(" ")[1]);
             double z = Double.parseDouble(pos.split(" ")[2]);
 
+            ArrayList<Integer> stickers = new ArrayList<Integer>(Arrays.asList(1,2,3,4));
+
             int left = (int)(Math.random()*5); // 0~4 (스티커 안붙이는 경우 고려)
-            // 왼쪽이 빈 스티커인 경우, 무조건 오른쪽 스티커는 있도록
-            int right = (left == 0) ? (int)(Math.random()*4)+1 : (int)(Math.random()*5);
+            int right;
+            if(left == 0) // 왼쪽이 빈 스티커인 경우, 무조건 오른쪽 스티커는 있도록
+                right = (int)(Math.random()*4)+1;
+            else { // 왼쪽이 빈 스티커가 아닌 경우, 오른쪽은 걔랑 다른 숫자
+                stickers.remove((Integer) left);
+                right = stickers.get((int)(Math.random()*3)); // 0~2 중에 하나
+            }
 
             Oreum oreum = Oreum.builder()
                     .name(name)
