@@ -2,6 +2,7 @@ package com.example.goorm.oreum.dto;
 
 import com.example.goorm.oreum.domain.MyOreum;
 import com.example.goorm.oreum.domain.Oreum;
+import com.example.goorm.oreum.domain.OreumType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import lombok.Setter;
 public class OreumResponse {
     private String nickname;
     private String name;
-    private String type;
+    private OreumType type;
     private double xPos;
     private double yPos;
     private double zPos;
@@ -24,7 +25,7 @@ public class OreumResponse {
         return OreumResponse.builder()
                 .nickname(request.getNickname())
                 .name(oreum.getName())
-                .type(oreum.getOreumType().getTitle())
+                .type(oreum.getOreumType())
                 .xPos(oreum.getXPos())
                 .yPos(oreum.getYPos())
                 .zPos(oreum.getZPos())
@@ -38,7 +39,7 @@ public class OreumResponse {
         return OreumResponse.builder()
                 .nickname(myOreum.getNickname())
                 .name(oreum.getName())
-                .type(oreum.getOreumType().getTitle())
+                .type(oreum.getOreumType())
                 .xPos(oreum.getXPos())
                 .yPos(oreum.getYPos())
                 .zPos(oreum.getZPos())
