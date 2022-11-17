@@ -1,4 +1,4 @@
-package com.example.goorm.oreum;
+package com.example.goorm.oreum.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.example.goorm.oreum;
+package com.example.goorm.oreum.domain;
 
 public interface EnumMapperType {
     // 해당 Enum의 이름을 조회하는 변수

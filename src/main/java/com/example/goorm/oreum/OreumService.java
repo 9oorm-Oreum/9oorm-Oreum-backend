@@ -1,6 +1,8 @@
 package com.example.goorm.oreum;
 
-import com.example.goorm.oreum.dto.BirthDayRequest;
+import com.example.goorm.oreum.domain.MyOreum;
+import com.example.goorm.oreum.domain.Oreum;
+import com.example.goorm.oreum.dto.BirthdayRequest;
 import com.example.goorm.oreum.dto.OreumResponse;
 import com.example.goorm.oreum.repository.MyOreumRepository;
 import com.example.goorm.oreum.repository.OreumRepository;
@@ -10,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.io.*;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -19,7 +19,7 @@ public class OreumService {
     private final OreumRepository oreumRepository;
     private final MyOreumRepository myOreumRepository;
 
-    public OreumResponse getOreum(BirthDayRequest request){
+    public OreumResponse getOreum(BirthdayRequest request){
         int month = request.getMonth();
         int day = request.getDay();
         Oreum oreum = oreumRepository.findByBirthday(month, day); // 저장된 오름을 찾아서
@@ -43,56 +43,5 @@ public class OreumService {
         });
         log.info("Oreum id: "+oreumInfo.getId());
         return OreumResponse.ofOthers(oreumInfo, myOreum);
-    }
-
-    public void readCsv(){
-        File csv = new File("C:\\Users\\Windows10\\Desktop\\오름.txt");
-        BufferedReader br = null;
-        String line = "";
-
-        try {
-            br = new BufferedReader(new FileReader(csv));
-            int monthCheck = 1;
-            int dayCheck = 1;
-
-            while((line = br.readLine()) != null) {
-                String[] lineArr = line.split(",");
-                String name = lineArr[0];
-                String type = lineArr[1].split("/")[1];
-                String pos = lineArr[2];
-                Double x = Double.parseDouble(pos.split(" ")[0]);
-                Double y = Double.parseDouble(pos.split(" ")[1]);
-                Double z = Double.parseDouble(pos.split(" ")[2]);
-
-                Oreum oreum = Oreum.builder()
-                        .name(name)
-                        .xPos(x)
-                        .yPos(y)
-                        .zPos(z)
-                        .month(monthCheck)
-                        .day(dayCheck)
-                        .build();
-
-                oreum.toTypeEnum(type);
-                oreumRepository.save(oreum);
-                if((monthCheck == 1 || monthCheck == 3 || monthCheck == 5 || monthCheck == 7
-                        || monthCheck == 8 || monthCheck == 10 || monthCheck ==12) && dayCheck == 31) {
-                    monthCheck++;
-                    dayCheck = 0;
-                }
-                else if(monthCheck == 2 && dayCheck == 29){
-                    monthCheck++;
-                    dayCheck = 0;
-                }
-                else if((monthCheck == 4 || monthCheck == 6 || monthCheck ==9 || monthCheck == 11) && dayCheck == 30){
-                    monthCheck++;
-                    dayCheck = 0;
-                }
-                dayCheck++;
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }

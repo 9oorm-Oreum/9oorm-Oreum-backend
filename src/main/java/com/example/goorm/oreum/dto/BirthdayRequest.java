@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BirthDayRequest {
+public class BirthdayRequest {
     private String nickname;
     private int month;
     private int day;

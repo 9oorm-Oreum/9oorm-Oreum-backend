@@ -1,8 +1,8 @@
 package com.example.goorm.oreum.dto;
 
-import com.example.goorm.oreum.MyOreum;
-import com.example.goorm.oreum.Oreum;
-import com.example.goorm.oreum.OreumType;
+import com.example.goorm.oreum.domain.MyOreum;
+import com.example.goorm.oreum.domain.Oreum;
+import com.example.goorm.oreum.domain.OreumType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +19,7 @@ public class OreumResponse {
     private double zPos;
     private Long myOreumId;
 
-    public static OreumResponse of(Oreum oreum, MyOreum myOreum, BirthDayRequest request){
+    public static OreumResponse of(Oreum oreum, MyOreum myOreum, BirthdayRequest request){
         return OreumResponse.builder()
                 .nickname(request.getNickname())
                 .name(oreum.getName())
