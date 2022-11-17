@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @Entity
 @Getter
@@ -20,12 +21,21 @@ public class Oreum {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-    private String type;
+    private OreumType type;
     private Double xPos;
     private Double yPos;
     private Double zPos;
-    private LocalDateTime birthDate;
+    private int month;
+    private int day;
+
+    // 랜덤 색상값 추가해줘야 함
+    public void toTypeEnum(String type) {
+        this.type = Arrays.stream(OreumType.values())
+                .filter(o1 -> o1.getTitle().equals(type))
+                .findFirst()
+                .get();
+    }
 
 }
+
