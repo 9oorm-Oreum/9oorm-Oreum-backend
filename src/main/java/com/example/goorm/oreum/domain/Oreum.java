@@ -1,11 +1,11 @@
-package com.example.goorm.oreum;
+package com.example.goorm.oreum.domain;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Entity
@@ -13,7 +13,7 @@ import java.util.Arrays;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Test {
+public class Oreum {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

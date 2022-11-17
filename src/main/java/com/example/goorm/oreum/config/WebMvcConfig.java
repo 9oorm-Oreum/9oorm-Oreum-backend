@@ -1,4 +1,4 @@
-package com.example.goorm;
+package com.example.goorm.oreum.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

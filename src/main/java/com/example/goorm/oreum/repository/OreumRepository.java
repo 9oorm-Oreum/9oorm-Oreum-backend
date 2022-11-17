@@ -1,6 +1,6 @@
 package com.example.goorm.oreum.repository;
 
-import com.example.goorm.oreum.Oreum;
+import com.example.goorm.oreum.domain.Oreum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
