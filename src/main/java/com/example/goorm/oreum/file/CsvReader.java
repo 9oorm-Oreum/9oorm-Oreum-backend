@@ -18,8 +18,8 @@ public class CsvReader {
                 .name("CsvReader")
                 .resource(new PathResource("C:\\Users\\Windows10\\Desktop\\오름.txt"))
                 .delimited() // 한 라인에서 각각의 컬럼을 어떤 구분자로 구분할 건지
-                .names("name", "type", "pos")
-                .targetType(CsvReaderDto.class)
+                .names("name", "type", "pos") // 여러개의 string 파라미터 순서대로 넘겨서
+                .targetType(CsvReaderDto.class) // 매핑돼서 변환될 dto 정의
                 .build();
     }
 }
